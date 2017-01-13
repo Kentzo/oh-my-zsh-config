@@ -44,7 +44,7 @@ if [[ ${SHELL_SESSION_DID_INIT:-0} -eq 0 ]] && [[ -n "${TERM_SESSION_ID}" ]] the
 
       if shlock -f "${expiration_lock_file}" -p $$; then
         echo -n 'Deleting expired sessions...'
-        local delete_count=$(find "${я}" -type f -mtime +2w -print -delete | wc -l)
+        local delete_count=$(find "${SHELL_SESSION_DIR}" -type f -mtime +2w -print -delete | wc -l)
         [ "${delete_count}" -gt 0 ] && echo ${delete_count}' completed.' || echo 'none found.'
         touch "${SHELL_SESSION_TIMESTAMP_FILE}"
         rm "${expiration_lock_file}"
